@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:loja_virtual_flutter/views/productsOverviewScreen.dart';
+import 'package:shop/views/productsOverviewScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +9,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Minha Loja',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        accentColor: Colors.deepOrange,
+        fontFamily: "Lato",
       ),
       home: ProductsOverviewScreen(),
     );

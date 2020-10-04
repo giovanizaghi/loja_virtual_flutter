@@ -6,7 +6,9 @@ import 'package:shop/utils/appRoutes.dart';
 class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Product product = Provider.of<Product>(context);
+    final Product product = Provider.of<Product>(context,
+        listen:
+            false); //listen é igual a false para NÃO atualizar a interface conforme os dados mudarem
     final themeContext = Theme.of(context);
 
     return ClipRRect(
@@ -26,13 +28,17 @@ class ProductItem extends StatelessWidget {
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: IconButton(
-            icon: Icon(
-                product.isFavorite ? Icons.favorite : Icons.favorite_border),
-            onPressed: () {
-              product.toggleFavorite();
-            },
-            color: themeContext.accentColor,
+          leading: Consumer<Product>(
+            //Consumer usado aqui para mudar APENAS o ícone do botão e atualizar só esta parte do componente
+            builder: (ctx, product, _) => IconButton(
+              //terceiro parametro é um child que não vai ser alterado, não é utilizado aqui
+              icon: Icon(
+                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
+              onPressed: () {
+                product.toggleFavorite();
+              },
+              color: themeContext.accentColor,
+            ),
           ),
           title: Text(
             product.title,
